@@ -1,24 +1,42 @@
 import React, { useState } from "react";
 import Header from "../headerMovieList";
 import FilterCard from "../filterMoviesCard";
-import MovieList from "../movieList";
+import PaginatedMovies from "../movieList";
 import Grid from "@mui/material/Grid";
 
 function MovieListPageTemplate({ movies, title, action }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
+  const [sortFilter, setSortFilter] = useState("");
+  const [sortType, setSortType] = useState("0");
   const genreId = Number(genreFilter);
 
   let displayedMovies = movies
     .filter((m) => {
-      return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
+      let tmp = m.title ? m.title : m.name;
+      return tmp.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
     })
     .filter((m) => {
       return genreId > 0 ? m.genre_ids.includes(genreId) : true;
+    })
+    .sort((m1, m2) => (
+      (m1[sortType] < m2[sortType]) ? 1 : (m1[sortType] > m2[sortType]) ? -1 : 0
+    ))
+    // eslint-disable-next-line
+    .sort((m1, m2) => {
+      if (sortType === "title") {
+        return m1.title.localeCompare(m2.title); 
+      }
     });
 
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
+    else if (type === "sort") {
+      setSortFilter(value);
+      if (value ==="Latest") setSortType("latest");
+      else if (value === "Rating") setSortType("vote_average");
+      else if (value === "Alphabetical") setSortType("title");
+    }
     else setGenreFilter(value);
   };
 
@@ -33,9 +51,10 @@ function MovieListPageTemplate({ movies, title, action }) {
             onUserInput={handleChange}
             titleFilter={nameFilter}
             genreFilter={genreFilter}
+            sortFilter={sortFilter}
           />
         </Grid>
-        <MovieList action={action} movies={displayedMovies}></MovieList>
+        <PaginatedMovies action={action} movies={displayedMovies} moviesPerPage={7}></PaginatedMovies>
       </Grid>
     </Grid>
   );

@@ -9,6 +9,9 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews";
+import CardActions from "@mui/material/CardActions";
+import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 
 const root = {
@@ -68,6 +71,23 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
                 <Chip label={p.name} sx={{...chip}} />
             </li>
         ))}
+      </Paper>
+      <Paper 
+        component="ul" 
+        sx={{...root}}
+      >
+        <CardActions style={{justifyContent:"center"}}>
+        <li>
+          <Link to={`/movies/${movie.id}/cast`} style={{textDecoration:'none'}}>
+          <Button variant="contained" size="medium" style={{backgroundColor:'#9542bb'}}> Cast List </Button>
+          </Link>
+        </li>
+        <li>
+          <Link to={`/movies/${movie.id}/crew`} style={{textDecoration:'none'}}>
+          <Button variant="contained" size="medium" style={{backgroundColor:'#9542bb'}}> Crew List</Button>
+          </Link>
+        </li>
+      </CardActions>
       </Paper>
       <Fab
         color="secondary"

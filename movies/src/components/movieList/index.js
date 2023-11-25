@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Movie from "../movieCard";
 import Grid from "@mui/material/Grid";
+import ReactPaginate from 'react-paginate';
+import './index.css';
 
 const MovieList = ( {movies, action }) => {
   let movieCards = movies.map((m) => (
@@ -11,4 +13,41 @@ const MovieList = ( {movies, action }) => {
   return movieCards;
 };
 
-export default MovieList;
+const PaginatedMovies = ({ movies, moviesPerPage, action })  => {
+  const [movieOffset, setMovieOffset] = useState(0);
+
+  const endOffset = movieOffset + moviesPerPage;
+  //console.log(`Loading movies from ${movieOffset} to ${endOffset}`);
+  const currentMovies = movies.slice(movieOffset, endOffset);
+  const pageCount = Math.ceil(movies.length / moviesPerPage);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * moviesPerPage) % movies.length;
+    /*console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );*/
+    setMovieOffset(newOffset);
+  };
+
+  return (
+    <>
+      <MovieList movies={currentMovies} action={action} />
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="Next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel="< Previous"
+        renderOnZeroPageCount={null}
+        containerClassName={"pagination"}
+        previousLinkClassName={"pagination__link"}
+        nextLinkClassName={"pagination__link"}
+        disabledClassName={"pagination__link--disabled"}
+        activeClassName={"pagination__link--active"}
+      />
+    </>
+  );
+}
+
+export default PaginatedMovies;
