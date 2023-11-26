@@ -7,52 +7,65 @@ This repository contains the implementation of a React App, its associated Cypre
 ## React App Features.
 
  
-+ Feature 1
-+ Feature 2
-+ Feature 3
-+ etc
-+ etc
++ Trending Movies Page
++ Now Playing Page
++ Top Rated TV Page
++ Add Cast List to movies and the page link to movie details page
++ Add sort and filtering: sort by Rating or Latest movies
++ Add Crew List to movies and the page link to movie details page
++ Add search filter to Cast List page: search cast name
++ Add search filter to Crew List page: search crew name
++ Add switch button (responsive UI): sort cast name alphabetically
++ Add People Details Page - link to cast and crew card
++ Add Login, Logout, Register, Reset Page
++ Add Google authentication with firebase
++ Add Pagination to all page
++ Add new MUI components: ManIcon, LocationOnIcon, FaceIcon, WomanIcon
 
-## Automated Tests.
+## Automated Tests. 
 
 ### Unique functionality testing (if relevant).
 
-[Briefly explain the parts of your app's  functionality that are unique and state the associated test file name.] 
+Pagination - The user can click page number and then page jump to the cliked number page.
 
-e.g.
++ cypress/e2e/pagination.cy.js
 
-__Favourite Movie tagging__ - The user can tag movies as their favourite, and those selected are listed on a separate page.
+Sort By Rating and Latest - The use can choose filter by rating or latest, the page can change to page that movies sorted by rating or latest.
 
-+ cypress/e2e/favourites.cy.js
++ cypress/e2e/sortMovies.cy.js
 
-__Feature X__ - The user can ......
+### Best test cases
 
-+ cypress/e2e/featureX.cy.js
++ cypress/e2e/peopleDetails.cy.js
++ cypress/e2e/sortMovies.cy.js
 
 ### Error/Exception testing (if relevant).
 
-[State the cases that demonstrate error and/or exception testing.]
++ cypress/e2e/pagination.cy.js
 
-1. Display the Favourite Movies page when no movies have been tagged.
-1. Submitting a Movie Review form when the user's name is blank.
-1. Other case X
+1. If don't click, the page not changed
+1. Click the number, the page changed
+1. If click the present page, it don't changed
 
 ### Cypress Custom commands (if relevant).
 
-[ Specify the test file(s) that use a custom Cypress command(s) that you implemented.]
-
-e.g.
-+ cypress/e2e/filtering.cy.js
-+ cypress/e2e/favourites.cy.js
++ cypress/e2e/sortMovies.cy.js
 
 ## Code Splitting.
 
-[Specify the pathname of each source code file that contains evidence of code splitting in your React app.]
 
-e.g.
-+ src/index.js
-+ src/pages/favouriteMoviesPage.js
-+ src/components/movieCard/index.js
++ src/pages/castListPage.js
++ src/pages/crewListPage.js
++ src/pages/favoriteMoviesPage.js
++ src/pages/homePage.js
++ src/pages/movieDetailsPage.js
++ src/pages/movieReviewPage.js
++ src/pages/mustWatchMoviesPage.js
++ src/pages/personDetailsPage.js
++ src/pages/trendingMoviesPage.js
++ src/pages/upcomingMoviesPage.js
++ src/pages/nowPlayingPage.js
++ src/pages/topRatedTVPage.js
 
 ## Pull Requests.
 
@@ -60,8 +73,3 @@ e.g.
 
 ## Independent learning (If relevant).
 
-[ Briefly explain the work you did to satisfy the requirements of the Outstanding grade category, and include proof (e.g. screenshots) of its success. Also, mention the files that contain evidence of this work.
-
-![](./images/sample.png)
-
-State any other evidence of independent learning achieved while completing this assignment.
