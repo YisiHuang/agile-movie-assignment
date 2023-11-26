@@ -73,3 +73,5 @@ Sort By Rating and Latest - The use can choose filter by rating or latest, the p
 
 ## Independent learning (If relevant).
 
+Video: https://youtu.be/b03AvCLKgl8
+Gitlab: https://gitlab.com/YisiHuang/agile-movies-assignment.git
