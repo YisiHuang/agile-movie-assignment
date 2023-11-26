@@ -23,3 +23,12 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('verifyMovieTitles', (movies) => {
+    cy.get(".MuiCardHeader-content").each(($card, index) => {
+        //Necessary to prevent errors when API returns double spacing.
+        var title = movies[index].title.replace( /\s\s+/g, ' ' );
+        cy.wrap($card).find("p").contains(title);
+    });
+});
+
